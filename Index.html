@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acciones Solidarias | APS-09</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="logo">
+        <div class="logo-icon">★</div>
+        <div class="logo-text">
+          La Salle
+          <span>APS-09</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h1
+          style="
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 10px;
+          "
+        >
+          Acciones Solidarias
+        </h1>
+
+        <div class="divider"></div>
+
+        <input
+          type="text"
+          id="inputBusqueda"
+          placeholder="Buscar acción..."
+          onkeyup="filtrarTabla()"
+          style="
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text);
+          "
+        />
+
+        <select
+          id="filtroColegio"
+          onchange="filtrarTabla()"
+          style="
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text);
+          "
+        >
+          <option value="">Todos los colegios</option>
+        </select>
+
+        <table
+          id="tablaProyectos"
+          style="width: 100%; border-collapse: collapse"
+        >
+          <tbody id="cuerpoTabla"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script>
+      const listaProyectos = [
+        {
+          id: "op_kilo_1",
+          colegio: "La Salle Sagrado Corazón",
+          titulo: "Operación Kilo",
+        },
+        {
+          id: "captura_vida",
+          colegio: "La Salle La Seu d'Urgell",
+          titulo: "Captura la Vida",
+        },
+        {
+          id: "mercado_navidad",
+          colegio: "La Salle Mollerussa",
+          titulo: "Mercado Solidario de Navidad",
+        },
+        {
+          id: "mercadillo_virlecha",
+          colegio: "La Salle Virlecha",
+          titulo: "Mercadillo solidario",
+        },
+        {
+          id: "tienda_fisica",
+          colegio: "La Salle Virlecha",
+          titulo: "Tienda Física",
+        },
+        {
+          id: "juegaterapia",
+          colegio: "Colegio La Salle Virgen del Mar",
+          titulo: "Juegaterapia",
+        },
+        {
+          id: "alzheimer",
+          colegio: "Colegio La Salle Virgen del Mar",
+          titulo: "Centro de Día Alzheimer",
+        },
+        {
+          id: "estrellas",
+          colegio: "Colegio La Salle Virgen del Mar",
+          titulo: "Noches con Estrellas",
+        },
+        {
+          id: "donacion_sangre",
+          colegio: "Colegio La Salle Virgen del Mar",
+          titulo: "Donación de sangre",
+        },
+        {
+          id: "recogida_alimentos_sjb",
+          colegio: "Colegio San Juan Bautista",
+          titulo: "Recogida de alimentos",
+        },
+      ];
+
+      window.onload = function () {
+        const selectFiltro = document.getElementById("filtroColegio");
+        const cuerpoTabla = document.getElementById("cuerpoTabla");
+
+        const colegiosAgrupados = {};
+
+        listaProyectos.forEach((p) => {
+          if (!colegiosAgrupados[p.colegio]) colegiosAgrupados[p.colegio] = [];
+          colegiosAgrupados[p.colegio].push(p);
+        });
+
+        Object.keys(colegiosAgrupados).forEach((nombreColegio) => {
+          let option = document.createElement("option");
+          option.value = nombreColegio;
+          option.text = nombreColegio;
+          selectFiltro.appendChild(option);
+        });
+
+        let htmlTabla = "";
+
+        Object.keys(colegiosAgrupados).forEach((nombreColegio) => {
+          htmlTabla += `
+<tr>
+<td style="padding:10px; font-weight:bold; color: var(--color-gold);">${nombreColegio}</td>
+<td>
+<ul style="list-style:none; padding:0;">
+`;
+
+          colegiosAgrupados[nombreColegio].forEach((proj) => {
+            htmlTabla += `
+<li style="display:flex; justify-content:space-between; margin-bottom:8px;">
+<span>${proj.titulo}</span>
+<a href="detalle.html?proyecto=${proj.id}" class="btn-back">Ver</a>
+</li>
+`;
+          });
+
+          htmlTabla += `
+</ul>
+</td>
+</tr>
+`;
+        });
+
+        cuerpoTabla.innerHTML = htmlTabla;
+      };
+
+      function filtrarTabla() {
+        var input = document.getElementById("inputBusqueda");
+        var filter = input.value.toUpperCase();
+        var select = document.getElementById("filtroColegio");
+        var filterCole = select.value.toUpperCase();
+
+        var table = document.getElementById("tablaProyectos");
+        var tr = table
+          .getElementsByTagName("tbody")[0]
+          .getElementsByTagName("tr");
+
+        for (var i = 0; i < tr.length; i++) {
+          var tdCole = tr[i].getElementsByTagName("td")[0];
+          var tdProjs = tr[i].getElementsByTagName("td")[1];
+
+          if (tdCole && tdProjs) {
+            var txtValueCole = tdCole.textContent || tdCole.innerText;
+            var matchColegio =
+              filterCole === "" ||
+              txtValueCole.toUpperCase().indexOf(filterCole) > -1;
+
+            var liItems = tdProjs.getElementsByTagName("li");
+            var hasVisibleLi = false;
+
+            for (var j = 0; j < liItems.length; j++) {
+              var spanProj = liItems[j].getElementsByTagName("span")[0];
+              var txtValueProj = spanProj.textContent || spanProj.innerText;
+
+              var matchText =
+                filter === "" ||
+                txtValueCole.toUpperCase().indexOf(filter) > -1 ||
+                txtValueProj.toUpperCase().indexOf(filter) > -1;
+
+              if (matchColegio && matchText) {
+                liItems[j].style.display = "";
+                hasVisibleLi = true;
+              } else {
+                liItems[j].style.display = "none";
+              }
+            }
+
+            tr[i].style.display = hasVisibleLi ? "" : "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

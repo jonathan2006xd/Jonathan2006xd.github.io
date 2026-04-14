@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle Proyecto</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="logo">
+        <div class="logo-icon">★</div>
+        <div class="logo-text">
+          La Salle
+          <span>APS-09</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-img-wrapper">
+        <img id="imagen" />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="badge">Acción Solidaria</span>
+        <h1 class="hero-title" id="titulo"></h1>
+        <p class="hero-school" id="colegio"></p>
+      </div>
+    </section>
+
+    <main>
+      <div class="card">
+        <p class="description-label">Descripción</p>
+        <p class="description-text" id="descripcion"></p>
+
+        <div class="divider"></div>
+
+        <dl class="meta-grid">
+          <div class="meta-item">
+            <dt>Colegio</dt>
+            <dd id="meta-colegio"></dd>
+          </div>
+
+          <div class="meta-item">
+            <dt>Proyecto</dt>
+            <dd id="meta-nombre"></dd>
+          </div>
+
+          <div class="meta-item">
+            <dt>Tipo</dt>
+            <dd id="meta-tipo"></dd>
+          </div>
+
+          <div class="meta-item">
+            <dt>Modalidad</dt>
+            <dd id="meta-modalidad"></dd>
+          </div>
+        </dl>
+
+        <a href="index.html" class="btn-back">← Volver</a>
+      </div>
+    </main>
+
+    <script>
+      const datos = {
+        juegaterapia: {
+          titulo: "Juegaterapia",
+          colegio: "Colegio La Salle Virgen del Mar",
+          descripcion:
+            "Acompañamiento de pacientes pediátricos en hospital, llevándolos a actividades como cine y acompañamiento emocional.",
+          tipo: "Apoyo hospitalario infantil",
+          modalidad: "Hospital Torrecárdenas",
+          img: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289",
+        },
+
+        alzheimer: {
+          titulo: "Centro de Día Alzheimer",
+          colegio: "Colegio La Salle Virgen del Mar",
+          descripcion:
+            "Acompañamiento a personas mayores con alzhéimer ayudando en su movilidad y actividades diarias.",
+          tipo: "Apoyo a mayores",
+          modalidad: "Centro de día",
+          img: "https://images.unsplash.com/photo-1551190822-a9333d879b1f",
+        },
+
+        donacion_sangre: {
+          titulo: "Donación de Sangre",
+          colegio: "Colegio La Salle Virgen del Mar",
+          descripcion:
+            "Campaña solidaria para fomentar la donación de sangre en colaboración con hospitales.",
+          tipo: "Salud",
+          modalidad: "Presencial",
+          img: "https://images.unsplash.com/photo-1615461066841-6116e61058f4",
+        },
+
+        op_kilo_1: {
+          titulo: "Operación Kilo",
+          colegio: "La Salle Sagrado Corazón",
+          descripcion:
+            "Recogida y distribución de alimentos para familias necesitadas.",
+          tipo: "Recogida de alimentos",
+          modalidad: "Centro educativo",
+          img: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8",
+        },
+
+        captura_vida: {
+          titulo: "Captura la Vida",
+          colegio: "La Salle La Seu d'Urgell",
+          descripcion:
+            "Taller de fotografía móvil para personas mayores fomentando la inclusión digital.",
+          tipo: "Inclusión digital",
+          modalidad: "Presencial",
+          img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+        },
+
+        mercado_navidad: {
+          titulo: "Mercado Solidario",
+          colegio: "La Salle Mollerussa",
+          descripcion:
+            "Organización de un mercado solidario navideño con fines benéficos.",
+          tipo: "Recaudación",
+          modalidad: "Centro educativo",
+          img: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b",
+        },
+
+        mercadillo_virlecha: {
+          titulo: "Mercadillo solidario",
+          colegio: "La Salle Virlecha",
+          descripcion: "Venta de productos solidarios para recaudar fondos.",
+          tipo: "Recaudación",
+          modalidad: "Presencial",
+          img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9",
+        },
+
+        tienda_fisica: {
+          titulo: "Tienda Física",
+          colegio: "La Salle Virlecha",
+          descripcion:
+            "Proyecto para fomentar la inclusión laboral de personas con discapacidad.",
+          tipo: "Inserción laboral",
+          modalidad: "Asociación ADIPA",
+          img: "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0",
+        },
+
+        recogida_alimentos_sjb: {
+          titulo: "Recogida de alimentos",
+          colegio: "Colegio San Juan Bautista",
+          descripcion:
+            "Recogida de alimentos no perecederos para familias necesitadas.",
+          tipo: "Solidaridad",
+          modalidad: "Centro educativo",
+          img: "https://images.unsplash.com/photo-1601598851547-4302969d0614",
+        },
+
+        estrellas: {
+          titulo: "Noches con Estrellas",
+          colegio: "Colegio La Salle Virgen del Mar",
+          descripcion:
+            "Reparto de comida y acompañamiento a personas sin hogar.",
+          tipo: "Inclusión social",
+          modalidad: "Urbano",
+          img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c",
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("proyecto");
+
+      const p = datos[id];
+
+      if (p) {
+        document.getElementById("titulo").innerHTML = p.titulo;
+        document.getElementById("colegio").innerText = p.colegio;
+        document.getElementById("descripcion").innerText = p.descripcion;
+        document.getElementById("meta-colegio").innerText = p.colegio;
+        document.getElementById("meta-nombre").innerText = p.titulo;
+        document.getElementById("meta-tipo").innerText = p.tipo;
+        document.getElementById("meta-modalidad").innerText = p.modalidad;
+        document.getElementById("imagen").src = p.img;
+      }
+    </script>
+  </body>
+</html>
