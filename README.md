@@ -2,12 +2,11 @@
 https://jonathan2006xd.github.io/Index.html
 
 
-Cómo añadir un nuevo proyecto solidario
+### 2. Cómo añadir un nuevo proyecto solidario
 
 Para añadir un nuevo proyecto solidario al sitio web, se deben seguir los siguientes pasos:
 
-
-### 2. Añadir el proyecto en el index
+Añadir el proyecto en el index
 
 Abrir el archivo `index.html` y localizar el array `listaProyectos`.
 
