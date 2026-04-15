@@ -14,3 +14,7 @@ Añadir un nuevo objeto con la siguiente estructura:
   colegio: "Nombre del colegio",
   titulo: "Nombre de la acción"
 }
+
+
+### 2. Link para la pagina web
+https://jonathan2006xd.github.io/Index.html
