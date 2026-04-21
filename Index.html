@@ -157,8 +157,8 @@
 
           colegiosAgrupados[nombreColegio].forEach((proj) => {
             htmlTabla += `
-<li style="display:flex; justify-content:space-between; margin-bottom:8px;">
-<span>${proj.titulo}</span>
+<li style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+<span style="flex:1;">${proj.titulo}</span>
 <a href="detalle.html?proyecto=${proj.id}" class="btn-back">Ver</a>
 </li>
 `;
