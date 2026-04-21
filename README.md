@@ -1,6 +1,6 @@
 ### 1. Link para la pagina web
-https://jonathan2006xd.github.io/Index.html
 
+https://jonathan2006xd.github.io/Index.html
 
 ### 2. Cómo añadir un nuevo proyecto solidario
 
