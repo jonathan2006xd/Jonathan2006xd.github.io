@@ -16,10 +16,10 @@ Abrir el archivo `index.html` y localizar el array `listaProyectos`.
 
 Añadir un nuevo objeto con la siguiente estructura:
 
-```javascript
-{
+- javascript -
+```{
   id: "nuevo_id",
   colegio: "Nombre del colegio",
   titulo: "Nombre de la acción"
 }
-
+```
