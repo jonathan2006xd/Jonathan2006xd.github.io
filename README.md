@@ -6,6 +6,7 @@ https://jonathan2006xd.github.io/Index.html
 
 El campo id debe ser único
 El id debe coincidir exactamente entre index.html y detalle.html
+
 NO es necesario crear nuevas páginas HTML, ya que el sistema utiliza una página dinámica (detalle.html)
 
 Para añadir un nuevo proyecto solidario al sitio web, se deben seguir los siguientes pasos:
